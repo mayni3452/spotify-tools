@@ -5,12 +5,12 @@ import os
 from pathlib import Path
 from ytmusicapi import YTMusic
 
-home_dir = Path.home()
-Music_dir = home_dir / "Music"
+OUTPUT_DIR = str(Path.home() / "Music")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def get_csv_path() -> Path:
     while True:
-        user_input = input("Enter CSV path: ").strip
+        user_input = input("Enter CSV path: ").strip()
         csv_path = Path(user_input).expanduser()
 
         if not user_input:
@@ -23,14 +23,13 @@ def get_csv_path() -> Path:
         if not csv_path.is_file():
             print("Error: the specified path is not a file.")
             continue
-        if csv_path.suffix.lower() != ".csv"
+        if csv_path.suffix.lower() != ".csv":
             print("Error: please select a csv file")
             continue
         return csv_path
 
 # --- Настройки ---
 CSV_FILE   = get_csv_path()
-OUTPUT_DIR = Music_dir
 DELAY      = 2
 # -----------------
 
